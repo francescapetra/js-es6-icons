@@ -1,5 +1,3 @@
-// Milestone 1
-// Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibil come //da layout.
 const icons = [
   {
     name: 'apple-alt',
@@ -110,24 +108,6 @@ const icons = [
     category: "animal"
   },
 ];
-//faccio ciclare gli elementi
-// destrutturo e vado ad appendere
-// con iconsContainer fai una selezione più pulita per append
-const iconsContainer = $(".icons");
-
-icons.forEach((icon) => {
-
-  const {name,prefix,family} = icon;
-
-  const html =
-  `<div>
-    <i class="${family} ${prefix}${name}"></i>
-    <div class ="title">${name}</div>
-  </div>`;
-
-  iconsContainer.append(html);
-
-});
 // Milestone 2
 // Coloriamo le icone per tipo
 
@@ -146,9 +126,41 @@ icons.forEach((item, i) => {
   }
   // console.log(categories);
 });
-//adesso le devo legare con i miei Colori
+//adesso le devo legare con i miei Colori e le mappo
+const iconsColored = icons.map((icon)=>{
+  const categoryIndex = categories.indexOf(icon.category);
+  const colorItem = colors[categoryIndex];
+  // mi restituisce 6 per colore
+  // console.log(colorItem);
+  // glielo setto come chiave
+  icon.color = colorItem;
 
+  // console.log(icon.color);
+  return icon;
+});
+// me ne restituisce 18 e lo vai a risettare nel destructuring
+console.log(iconsColored);
+// Milestone 1
+// Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibil come //da layout.
 
+//faccio ciclare gli elementi
+// destrutturo e vado ad appendere
+// con iconsContainer fai una selezione più pulita per append
+const iconsContainer = $(".icons");
+// lo cambi in iconsColored
+iconsColored.forEach((icon) => {
+
+  const {name, prefix, family, color} = icon;
+
+  const html =
+  `<div>
+    <i class="${family} ${prefix}${name}"style="color:${color}"></i>
+    <div class ="title">${name}</div>
+  </div>`;
+
+  iconsContainer.append(html);
+
+});
 
 // Milestone 3
 // Creiamo una select con i tipi di icone e usiamola per filtrare le icone
