@@ -112,34 +112,69 @@ const icons = [
 // Coloriamo le icone per tipo
 
 // setto i colori in un array
-const colors = [
-  "aqua",
-  "coral",
-  "pink"
-];
-//creo array categorie per poi fare il match
+// const colors = [
+//   "aqua",
+//   "coral",
+//   "pink"
+// ];
+// //creo array categorie per poi fare il match
 const categories = [];
-//mi faccio restituire le categories
+// //mi faccio restituire le categories
 icons.forEach((item, i) => {
   if (categories.includes(item.category) == false) {
     categories.push(item.category);
   }
-  // console.log(categories);
+console.log(categories);
 });
-//adesso le devo legare con i miei Colori e le mappo
+// //adesso le devo legare con i miei Colori e le mappo vecchio metodo
+// const iconsColored = icons.map((icon)=>{
+//   const categoryIndex = categories.indexOf(icon.category);
+//   const colorItem = colors[categoryIndex];
+//   // mi restituisce 6 per colore
+//   // console.log(colorItem);
+//   // glielo setto come chiave
+//   icon.color = colorItem;
+//
+//   // console.log(icon.color);
+//   return icon;
+// });
+// // me ne restituisce 18 e lo vai a risettare nel destructuring
+// console.log(iconsColored);
+//
+// colorItem
+// fai mappatura
+const colors = [
+  {
+    category:"food",
+    color: "coral",
+  },
+  {
+    category:"animal",
+    color: "aqua",
+  },
+  {
+    category:"beverage",
+    color: "blue",
+  },
+];
 const iconsColored = icons.map((icon)=>{
-  const categoryIndex = categories.indexOf(icon.category);
-  const colorItem = colors[categoryIndex];
+  // const categoryIndex = categories.indexOf(icon.category);
+  // const colorItem = colors[categoryIndex];
   // mi restituisce 6 per colore
   // console.log(colorItem);
   // glielo setto come chiave
+  let colorItem;
+  colors.forEach((item) => {
+    if (icon.category == item.category) {
+      colorItem = item.color;
+    }
+  });
+
   icon.color = colorItem;
 
   // console.log(icon.color);
   return icon;
 });
-// me ne restituisce 18 e lo vai a risettare nel destructuring
-console.log(iconsColored);
 // Milestone 1
 // spostata giù
 // Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibil come //da layout.
@@ -199,3 +234,4 @@ select.change(function(){
 
   });
 });
+// colorItem
