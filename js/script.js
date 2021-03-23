@@ -141,6 +141,7 @@ const iconsColored = icons.map((icon)=>{
 // me ne restituisce 18 e lo vai a risettare nel destructuring
 console.log(iconsColored);
 // Milestone 1
+// spostata giù
 // Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibil come //da layout.
 
 //faccio ciclare gli elementi
@@ -164,3 +165,37 @@ iconsColored.forEach((icon) => {
 
 // Milestone 3
 // Creiamo una select con i tipi di icone e usiamola per filtrare le icone
+// ci serve per fare il filtro sulle icone
+let select = $("#type");
+categories.forEach((item) => {
+let optionHtml = `<option value="${item}">${item}</option>`;
+select.append(optionHtml);
+});
+
+select.change(function(){
+  // mi prendo il valore di una select
+  let optionSelected = $(this).val();
+  let iconsFiltered = iconsColored.filter((icon)=> {
+    return icon.category == optionSelected;
+  });
+  //se l'array è vuoto mettimi tutte le icone
+  if (iconsFiltered.length == 0) {
+    iconsFiltered = iconsColored;
+  }
+  // svuota il contenitore
+  iconsContainer.html("");
+  // queste sono le filtrate in base alla optionSelected
+  iconsFiltered.forEach((icon) => {
+
+    const {name, prefix, family, color} = icon;
+
+    const html =
+    `<div>
+      <i class="${family} ${prefix}${name}"style="color:${color}"></i>
+      <div class ="title">${name}</div>
+    </div>`;
+
+    iconsContainer.append(html);
+
+  });
+});
