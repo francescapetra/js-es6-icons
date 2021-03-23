@@ -112,20 +112,43 @@ const icons = [
 ];
 //faccio ciclare gli elementi
 // destrutturo e vado ad appendere
+// con iconsContainer fai una selezione più pulita per append
+const iconsContainer = $(".icons");
+
 icons.forEach((icon) => {
 
   const {name,prefix,family} = icon;
 
-  const html = `<div>
-    <i class="${family} ${prefix} ${name}"></i>
+  const html =
+  `<div>
+    <i class="${family} ${prefix}${name}"></i>
     <div class ="title">${name}</div>
   </div>`;
 
-  $(".icons").append(html);
-});
+  iconsContainer.append(html);
 
+});
 // Milestone 2
 // Coloriamo le icone per tipo
-//
+
+// setto i colori in un array
+const colors = [
+  "aqua",
+  "coral",
+  "pink"
+];
+//creo array categorie per poi fare il match
+const categories = [];
+//mi faccio restituire le categories
+icons.forEach((item, i) => {
+  if (categories.includes(item.category) == false) {
+    categories.push(item.category);
+  }
+  // console.log(categories);
+});
+//adesso le devo legare con i miei Colori
+
+
+
 // Milestone 3
 // Creiamo una select con i tipi di icone e usiamola per filtrare le icone
